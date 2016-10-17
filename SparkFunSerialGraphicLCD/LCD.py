@@ -1,15 +1,13 @@
 #!/usr/bin/python
 """
 Graphic Serial LCD Libary Main File
-Alfredo Rius, based on Joel Bartlett's Arduino implementation
-and the docs:
+Alfredo Rius, based on Joel Bartlett's Arduino implementation and the docs:
 
 https://www.sparkfun.com/datasheets/LCD/Monochrome/Corrected-SFE-0016-DataSheet-08884-SerialGraphicLCD-v2.pdf
 
-10-16-16
+10-16-2016
 """
 
-#initialize an instance of the SoftwareSerial library 
 class LCD:
     def __init__(
         self,
@@ -234,7 +232,7 @@ class LCD:
         """
         self.s.write(b'\x7C\x0F%s%s%s%s\x01' % (chr(x1),chr(y1),chr(x2),chr(y2)))
         
-    def clear_line(self,x1,y1,x2,y2):
+    def clear_box(self,x1,y1,x2,y2):
         """
         Clear Box
         """
