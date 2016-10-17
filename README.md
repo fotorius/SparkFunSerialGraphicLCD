@@ -4,23 +4,23 @@ A simple way te get started with the [SparkFun Graphic LCD Serial Backpack](http
 Very easy to set up (but not exclusively) with the Raspberry Pi.
 
 ## Installation
-```
+```bash
 # Common dependencies
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install git python-serial python-pip
 
 # The actual library
-sudo pip install git+https://github.com/devalfrz/SparkFunSerialGraphicLCD.git
+sudo pip install -U git+https://github.com/devalfrz/SparkFunSerialGraphicLCD.git
 ```
 
 ## Usage
 On a file named `hello_world.py` write the following:
-```
+```python
 #!/usr/bin/python
 
 # Import the library
-from SparkFunSerialGraphicLCD import LCD
+from SparkFunSerialGraphicLCD.LCD import LCD
 
 # Initialize the display
 lcd = LCD()
@@ -35,6 +35,6 @@ lcd.write('Hello World!')
 lcd.close()
 ```
 Then run this code!
-```
+```bash
 sudo python hello_world.py
 ```

@@ -3,7 +3,7 @@ SparkFun Serial Graphic LCD
 """
 
 __title__ = 'SparkFun Serial Graphic LCD'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 __author__ = 'Alfredo Rius'
 __license__ = 'BSD 2-Clause'
 __copyright__ = 'Copyright 2016 Alfredo Rius'
