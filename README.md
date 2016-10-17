@@ -28,8 +28,11 @@ lcd = LCD()
 # Clean the display to start fresh
 lcd.clear()
 
+# Set cursor in the middle of the screen
+lcd.row_col(7,0)
+
 # Write something
-lcd.write('Hello World!')
+lcd.write('Hello World!',align='center')
 
 # Close the connection to the display
 lcd.close()
@@ -57,7 +60,7 @@ sudo python hello_world.py
 |:---| --- |
 | **close()** | Closes connection to the serial port. |
 | **clear()** | Clears the screen. |
-| **write(string)** | Writes a string. |
+| **write(string,[align,width])** | Writes a string. Align can be 'left', 'center' or 'right' and width can be the width of the screen (in pixels) or less. |
 | **reverse()** | Clears and reverses all pixels on the screen. |
 | **splash()** | Shows the SparkFun's splas screen. |
 | **backlight(duty)** | Sets the backlight of the screen (0 - 100). |

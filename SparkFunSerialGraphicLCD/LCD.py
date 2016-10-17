@@ -61,11 +61,26 @@ class LCD:
         #clears the screen, you will use this a lot!
         self.s.write(b'\x7C\x00')
 
-    def write(self,string):
+    def write(self,string,align='left',width=None):
         """
         Print text
         26 characters is the length of one line on the LCD
+        align(str) can be 'left', 'right', or 'center'
+        width(int) can be the width of te screen or less
         """ 
+        # Set default line width
+        if not width or width > self.width:
+            width = self.width
+        
+        # Align using spaces if necessary
+        if align == 'center':
+            if(len(string)<self.width):
+                string = ' '*((width/(self.char_width+self.letter_spacing)/2)-(len(string)/2)) + string
+
+        elif align == 'right':
+            if(len(string)<self.width):
+                string = ' '*((width/(self.char_width+self.letter_spacing))-len(string)) + string
+
         self.s.write(string)
       
     def writeln(self,string):
