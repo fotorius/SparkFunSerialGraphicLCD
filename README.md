@@ -54,7 +54,7 @@ sudo python hello_world.py
 
 ## Methods
 | Method | Description |
-|:---:| --- |
+|:---| --- |
 | **close()** | Closes connection to the serial port. |
 | **clear()** | Clears the screen. |
 | **write(string)** | Writes a string. |
