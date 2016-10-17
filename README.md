@@ -58,6 +58,7 @@ sudo python hello_world.py
 
 ## Methods
 The orgin of the screen (0,0) is the top left.
+
 | Method | Description |
 |:---| --- |
 | **close()** | Closes connection to the serial port. |
