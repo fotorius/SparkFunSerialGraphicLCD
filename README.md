@@ -62,7 +62,7 @@ The orgin of the screen (0,0) is the top left.
 |:---| --- |
 | **close()** | Closes connection to the serial port. |
 | **clear()** | Clears the screen. |
-| **write(string,[align,width])** | Writes a string. Align can be 'left', 'center' or 'right' and width can be the width of the screen (in pixels) or less. |
+| **write(string,[align='left',width=None])** | Writes a string. Align can be 'left', 'center' or 'right' and width can be the width of the screen (in pixels) or less. |
 | **reverse()** | Clears and reverses all pixels on the screen. |
 | **splash()** | Shows the SparkFun's splas screen. |
 | **backlight(duty)** | Sets the backlight of the screen (0 - 100). |
@@ -86,7 +86,7 @@ The orgin of the screen (0,0) is the top left.
 | **circle(x,y,rad)** | Draws a circle with center x,y and radius rad. |
 | **clear_circle(x,y,rad)** | Clears the circle with center x,y and radius rad. |
 | **clear_block(x1,y1,x2,y2)** | Clears everything inside the block x1,y1 to x2,y2. |
-| **image(image_path,x1,y1,x2,y2)** | Renders image in position x1,y1 to x2,y2. |
+| **image(image_path,x1,y1,x2,y2[,invert=False])** | Renders image in position x1,y1 to x2,y2. |
 
 ## More information
 - Here is the official [Graphic LCD Serial Backpack Datasheet](https://www.sparkfun.com/datasheets/LCD/Monochrome/Corrected-SFE-0016-DataSheet-08884-SerialGraphicLCD-v2.pdf) from SparkFun (very usefull but not easy to find).

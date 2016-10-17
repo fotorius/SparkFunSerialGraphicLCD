@@ -292,7 +292,7 @@ class LCD:
         """
         self.s.write(b'\x7C\x05%s%s%s%s' % (chr(x1),chr(self.height-y1),chr(x2),chr(self.height-y2)))
 
-    def image(self,image_path,x1,y1,x2,y2):
+    def image(self,image_path,x1,y1,x2,y2,invert=False):
         """
         Renders a black an white image
         """
@@ -316,6 +316,9 @@ class LCD:
         # Scan the image for set pixels
         for j in range(img.size[1]):
             for i in range(img.size[0]):
-                if img.getpixel((i,j)):
+                if not invert and img.getpixel((i,j)):
                     # Set the pixel
                     self.pixel(x1+i,y1+j)
+                elif invert and not img.getpixel((i,j)):
+                    self.pixel(x1+i,y1+j)
+                    
