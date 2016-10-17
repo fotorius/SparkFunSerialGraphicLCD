@@ -8,6 +8,8 @@ https://www.sparkfun.com/datasheets/LCD/Monochrome/Corrected-SFE-0016-DataSheet-
 10-16-2016
 """
 
+from PIL import Image
+
 class LCD:
     def __init__(
         self,
@@ -289,3 +291,31 @@ class LCD:
         Clear Area inside a block
         """
         self.s.write(b'\x7C\x05%s%s%s%s' % (chr(x1),chr(self.height-y1),chr(x2),chr(self.height-y2)))
+
+    def image(self,image_path,x1,y1,x2,y2):
+        """
+        Renders a black an white image
+        """
+        # Load image
+        img = Image.open(image_path)
+        # Convert to b/w
+        img = img.convert('1')
+        # Validate dimensions
+        if x2 < x1:
+            tmp = x1
+            x1 = x2
+            x2 = tmp
+        if y2 < y1:
+            tmp = y1
+            y1 = y2
+            y2 = tmp
+        # Resize to specific dimensions
+        img = img.resize((x2-x1,y2-y1))
+        # Clear the block where the image is going to be displayed
+        self.clear_block(x1,y1,x2,y2)
+        # Scan the image for set pixels
+        for j in range(img.size[1]):
+            for i in range(img.size[0]):
+                if img.getpixel((i,j)):
+                    # Set the pixel
+                    self.pixel(x1+i,y1+j)
