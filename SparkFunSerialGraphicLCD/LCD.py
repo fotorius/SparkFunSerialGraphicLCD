@@ -193,7 +193,22 @@ class LCD:
         """
         Sets the cursor to the specific row
         """
-        self.position(0,(row*(self.char_height+self.line_height))+1)
+        self.y((row*(self.char_height+self.line_height))+1)
+
+    def col(self,col):
+        """
+        Sets the cursor to the specific column
+        """
+        self.x((col*(self.char_width+self.letter_spacing))+1)
+
+    def row_col(self,row,col):
+        """
+        Sets the cursor to the specific row and column
+        """
+        self.row(row)
+        self.col(col)
+
+
 
     def home(self):
         """

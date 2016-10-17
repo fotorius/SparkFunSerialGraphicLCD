@@ -68,6 +68,8 @@ sudo python hello_world.py
 | **y(y)** | Sets the cursor to the position 'y' (inverse of the cartesian plane, from top to bottom). |
 | **position(x,y)** | Sets the cursor to the position 'x','y'. |
 | **row(row)** | Sets the cursor in the specified (text) row. |
+| **col(col)** | Sets the cursor in the specified (text) column. |
+| **row_col(row,col)** | Sets the cursor in the specified (text) row and column. |
 | **home()** | Sets the cursor in the position 0,0. |
 | **pixel(x,y)** | Sets the pixel in coordenates x,y. |
 | **clear_pixel(x,y)** | Clears the pixel in coordenates x,y. |
