@@ -208,7 +208,12 @@ class LCD:
         self.row(row)
         self.col(col)
 
-
+    def col_row(self,col,row):
+        """
+        Sets the cursor to the specific column and row
+        """
+        self.row(row)
+        self.col(col)
 
     def home(self):
         """

@@ -70,6 +70,7 @@ sudo python hello_world.py
 | **row(row)** | Sets the cursor in the specified (text) row. |
 | **col(col)** | Sets the cursor in the specified (text) column. |
 | **row_col(row,col)** | Sets the cursor in the specified (text) row and column. |
+| **col_row(col,row)** | Sets the cursor in the specified (text) column and row. |
 | **home()** | Sets the cursor in the position 0,0. |
 | **pixel(x,y)** | Sets the pixel in coordenates x,y. |
 | **clear_pixel(x,y)** | Clears the pixel in coordenates x,y. |
