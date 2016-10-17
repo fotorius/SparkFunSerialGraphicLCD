@@ -8,7 +8,8 @@ Very easy to set up (but not exclusively) with the Raspberry Pi.
 # Common dependencies
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install git python-serial python-pip
+sudo apt-get install git python-serial libjpeg-dev python-pip
+sudo pip install pillow
 
 # The actual library
 sudo pip install -U git+https://github.com/devalfrz/SparkFunSerialGraphicLCD.git

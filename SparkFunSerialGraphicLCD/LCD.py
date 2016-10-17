@@ -169,7 +169,6 @@ class LCD:
     def y(self,y):
         """
         Set Y inverse to the cartesian plane
-
         """
         if y > self.height - self.char_height:
             # Avoid screen overflow
@@ -241,53 +240,52 @@ class LCD:
         """
         Set Pixel
         """
-        self.s.write(b'\x7C\x10%s%s\x01' % (chr(x),chr(y)))
+        self.s.write(b'\x7C\x10%s%s\x01' % (chr(x),chr(self.height-y)))
 
     def clear_pixel(self,x,y):
         """
         Clear Pixel
         """
-        self.s.write(b'\x7C\x10%s%s\x00' % (chr(x),chr(y)))
+        self.s.write(b'\x7C\x10%s%s\x00' % (chr(x),chr(self.height-y)))
 
     def line(self,x1,y1,x2,y2):
         """
         Set Line
         """
-        self.s.write(b'\x7C\x0C%s%s%s%s\x01' % (chr(x1),chr(y1),chr(x2),chr(y2)))
+        self.s.write(b'\x7C\x0C%s%s%s%s\x01' % (chr(x1),chr(self.height-y1),chr(x2),chr(self.height-y2)))
         
     def clear_line(self,x1,y1,x2,y2):
         """
         Clear Line
         """
-        self.s.write(b'\x7C\x0C%s%s%s%s\x00' % (chr(x1),chr(y1),chr(x2),chr(y2)))
+        self.s.write(b'\x7C\x0C%s%s%s%s\x00' % (chr(x1),chr(self.height-y1),chr(x2),chr(self.height-y2)))
         
     def box(self,x1,y1,x2,y2):
         """
         Set Box
         """
-        self.s.write(b'\x7C\x0F%s%s%s%s\x01' % (chr(x1),chr(y1),chr(x2),chr(y2)))
+        self.s.write(b'\x7C\x0F%s%s%s%s\x01' % (chr(x1),chr(self.height-y1),chr(x2),chr(self.height-y2)))
         
     def clear_box(self,x1,y1,x2,y2):
         """
         Clear Box
         """
-        self.s.write(b'\x7C\x0F%s%s%s%s\x00' % (chr(x1),chr(y1),chr(x2),chr(y2)))
+        self.s.write(b'\x7C\x0F%s%s%s%s\x00' % (chr(x1),chr(self.height-y1),chr(x2),chr(self.height-y2)))
 
     def circle(self,x,y,rad):
         """
         Set Circle
         """
-        self.s.write(b'\x7C\x03%s%s%s\x01' % (chr(x),chr(y),chr(rad)))
+        self.s.write(b'\x7C\x03%s%s%s\x01' % (chr(x),chr(self.height-y),chr(rad)))
 
     def clear_circle(self,x,y,rad):
         """
         Clear Circle
         """
-        self.s.write(b'\x7C\x03%s%s%s\x00' % (chr(x),chr(y),chr(rad)))
+        self.s.write(b'\x7C\x03%s%s%s\x00' % (chr(x),chr(self.height-y),chr(rad)))
 
     def clear_block(self,x1,y1,x2,y2):
         """
         Clear Area inside a block
         """
-        self.s.write(b'\x7C\x05%s%s%s%s' % (chr(x1),chr(y1),chr(x2),chr(y2)))
-
+        self.s.write(b'\x7C\x05%s%s%s%s' % (chr(x1),chr(self.height-y1),chr(x2),chr(self.height-y2)))

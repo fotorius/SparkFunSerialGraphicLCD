@@ -5,6 +5,9 @@ __pycache__/
 # C extensions
 *.so
 
+# Library test file
+test.py
+
 # Distribution / packaging
 .Python
 env/
