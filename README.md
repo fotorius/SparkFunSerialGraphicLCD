@@ -8,7 +8,7 @@ Very easy to set up (but not exclusively) with the Raspberry Pi.
 # Common dependencies
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install git python-serial libjpeg-dev python-pip
+sudo apt-get install git python-serial libjpeg-dev python-pip python-dev
 sudo pip install pillow
 
 # The actual library
