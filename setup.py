@@ -73,7 +73,7 @@ setup(
     packages=get_packages('SparkFunSerialGraphicLCD'),
     package_data=get_package_data('SparkFunSerialGraphicLCD'),
     include_package_data=True,
-    install_requires=[],
+    install_requires=['pillow','pyserial'],
     zip_safe=False,
     classifiers=[
         'Development Status :: 5 - Production/Stable',

@@ -5,11 +5,19 @@ Very easy to set up (but not exclusively) with the Raspberry Pi.
 
 ## Installation
 ```bash
+# (Optional) add user to serial group
+sudo usermod -a -G tty pi
+# Logout and login again
+
 # Common dependencies
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install git python-serial libjpeg-dev python-pip python-dev
-sudo pip install pillow
+sudo apt-get install git libjpeg-dev python-pip python-dev libopenjp2-7-dev
+
+# Create virtualenv
+virtualenv -p python3 venv00
+cd venv00
+source bin/activate
 
 # The actual library
 sudo pip install -U git+https://github.com/devalfrz/SparkFunSerialGraphicLCD.git

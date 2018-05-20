@@ -77,13 +77,13 @@ class LCD:
         # Align using spaces if necessary
         if align == 'center':
             if(len(string)<self.width):
-                string = ' '*((width/(self.char_width+self.letter_spacing)/2)-(len(string)/2)) + string
+                string = ' '*int((width/(self.char_width+self.letter_spacing)/2)-(len(string)/2)) + string
 
         elif align == 'right':
             if(len(string)<self.width):
-                string = ' '*((width/(self.char_width+self.letter_spacing))-len(string)) + string
+                string = ' '*int((width/(self.char_width+self.letter_spacing))-len(string)) + string
 
-        self.s.write(string)
+        self.s.write(string.encode())
       
     def writeln(self,string):
         """
@@ -91,7 +91,7 @@ class LCD:
         26 characters is the length of one line on the LCD
         Doesn't work
         """ 
-        self.write(string+'\x10\x13')
+        self.write((string+'\x10\x13').encode())
       
     def reverse(self):
         """
@@ -111,7 +111,8 @@ class LCD:
         Set the back light
         Duty goes from 0 to 100
         """
-        self.s.write(b'\x7C\x02%s' % (chr(duty)))
+        self.s.write(b'\x7C\x02')
+        self.write_bytes(duty)
     
     def baudrate(self,baudrate):
         """
@@ -139,7 +140,8 @@ class LCD:
             key = 0x36
         else:
             raise ValueError("%d is an invalid baudrate" % baud)
-        self.s.write(b'\x7C\x07%s' % (chr(key)))
+        self.s.write(b'\x7C\x07')
+        self.write_bytes(key)
         self.s.baudrate = baudrate
         time.sleep(1)
 
@@ -166,7 +168,8 @@ class LCD:
         """
         Set X
         """
-        self.s.write(b'\x7C\x18%s' % (chr(x)))
+        self.s.write(b'\x7C\x18')
+        self.write_bytes(x)
     
     def y(self,y):
         """
@@ -174,9 +177,17 @@ class LCD:
         """
         if y > self.height - self.char_height:
             # Avoid screen overflow
-            self.s.write(b'\x7C\x19%s' % (chr(self.char_height)))
+            self.s.write(b'\x7C\x19')
+            self.write_bytes(self.char_height)
         else:
-            self.s.write(b'\x7C\x19%s' % (chr(self.height-y)))
+            self.s.write(b'\x7C\x19')
+            self.write_bytes(self.height-y)
+
+    def write_bytes(self,string):
+        """
+        Write encoded bytes
+        """
+        self.s.write(bytes(chr(string),'utf-8'))
 
     def position(self,x,y):
         """
@@ -242,55 +253,93 @@ class LCD:
         """
         Set Pixel
         """
-        self.s.write(b'\x7C\x10%s%s\x01' % (chr(x),chr(self.height-y)))
+        self.s.write(b'\x7C\x10')
+        self.write_bytes(x)
+        self.write_bytes(self.height-y)
+        self.s.write(b'\x01')
 
     def clear_pixel(self,x,y):
         """
         Clear Pixel
         """
-        self.s.write(b'\x7C\x10%s%s\x00' % (chr(x),chr(self.height-y)))
+        self.s.write(b'\x7C\x10')
+        self.write_bytes(x)
+        self.write_bytes(self.height-y)
+        self.s.write(b'\x00')
 
     def line(self,x1,y1,x2,y2):
         """
         Set Line
         """
-        self.s.write(b'\x7C\x0C%s%s%s%s\x01' % (chr(x1),chr(self.height-y1),chr(x2),chr(self.height-y2)))
+        self.s.write(b'\x7C\x0C')
+        self.write_bytes(x1)
+        self.write_bytes(self.height-y1)
+        self.write_bytes(x2)
+        self.write_bytes(self.height-y2)
+        self.s.write(b'\x01')
         
     def clear_line(self,x1,y1,x2,y2):
         """
         Clear Line
         """
-        self.s.write(b'\x7C\x0C%s%s%s%s\x00' % (chr(x1),chr(self.height-y1),chr(x2),chr(self.height-y2)))
+        self.s.write(b'\x7C\x0C')
+        self.write_bytes(x1)
+        self.write_bytes(self.height-y1)
+        self.write_bytes(x2)
+        self.write_bytes(self.height-y2)
+        self.s.write(b'\x00')
         
     def box(self,x1,y1,x2,y2):
         """
         Set Box
         """
-        self.s.write(b'\x7C\x0F%s%s%s%s\x01' % (chr(x1),chr(self.height-y1),chr(x2),chr(self.height-y2)))
+        self.s.write(b'\x7C\x0F')
+        self.write_bytes(x1)
+        self.write_bytes(self.height-y1)
+        self.write_bytes(x2)
+        self.write_bytes(self.height-y2)
+        self.s.write(b'\x01')
         
     def clear_box(self,x1,y1,x2,y2):
         """
         Clear Box
         """
-        self.s.write(b'\x7C\x0F%s%s%s%s\x00' % (chr(x1),chr(self.height-y1),chr(x2),chr(self.height-y2)))
+        self.s.write(b'\x7C\x0F')
+        self.write_bytes(x1)
+        self.write_bytes(self.height-y1)
+        self.write_bytes(x2)
+        self.write_bytes(self.height-y2)
+        self.s.write(b'\x00')
 
     def circle(self,x,y,rad):
         """
         Set Circle
         """
-        self.s.write(b'\x7C\x03%s%s%s\x01' % (chr(x),chr(self.height-y),chr(rad)))
+        self.s.write(b'\x7C\x03')
+        self.write_bytes(x)
+        self.write_bytes(self.height-y)
+        self.write_bytes(rad)
+        self.s.write(b'\x01')
 
     def clear_circle(self,x,y,rad):
         """
         Clear Circle
         """
-        self.s.write(b'\x7C\x03%s%s%s\x00' % (chr(x),chr(self.height-y),chr(rad)))
+        self.s.write(b'\x7C\x03')
+        self.write_bytes(x)
+        self.write_bytes(self.height-y)
+        self.write_bytes(rad)
+        self.s.write(b'\x00')
 
     def clear_block(self,x1,y1,x2,y2):
         """
         Clear Area inside a block
         """
-        self.s.write(b'\x7C\x05%s%s%s%s' % (chr(x1),chr(self.height-y1),chr(x2),chr(self.height-y2)))
+        self.s.write(b'\x7C\x05')
+        self.write_bytes(x1)
+        self.write_bytes(self.height-y1)
+        self.write_bytes(x2)
+        self.write_bytes(self.height-y2)
 
     def image(self,image_path,x1,y1,x2,y2,invert=False):
         """
